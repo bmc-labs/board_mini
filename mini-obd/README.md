@@ -19,7 +19,7 @@ If you are wondering what the differences are between the many ELM327 versions, 
 
 ## Board
 
-![mini::obd](./pictures/mini-obd-front.png "mini::obd")
+![mini::obd](./pictures/mini-obd-front.PNG "mini::obd")
 
 * Size: 54mm x 42.5 mm - exactly half a credit card
 * Mounting Holes:
