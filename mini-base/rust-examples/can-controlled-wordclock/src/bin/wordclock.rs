@@ -84,7 +84,7 @@ fn main() -> ! {
 
   defmt::info!("acquiring peripherals");
   // cp: core peripherals, dp: device specific peripherals
-  // let cp = cortex_m::Peripherals::take().unwrap();
+  let cp = cortex_m::Peripherals::take().unwrap();
   let dp = pac::Peripherals::take().unwrap();
 
   defmt::info!("acquiring flash and rcc devices");
@@ -154,23 +154,35 @@ fn main() -> ! {
   let wclk_pin = gpioa.pa3.into_push_pull_output(&mut gpioa.crl);
 
   defmt::info!("set up timers");
+  let mut wait_timer = Timer::syst(cp.SYST, &clocks).start_count_down(5.hz());
   let ctrl_timer =
     Timer::tim2(dp.TIM2, &clocks, &mut rcc.apb1).start_count_down(3.mhz());
   let wclk_timer =
     Timer::tim3(dp.TIM3, &clocks, &mut rcc.apb1).start_count_down(3.mhz());
 
   defmt::info!("set up color containers");
-  let ctrl_data: [RGB8; 3] = [ON, OFF, ON];
+  const CTRL_SIZE: usize = 3;
+  let mut ctrl_data: [RGB8; CTRL_SIZE] = [OFF; CTRL_SIZE];
   let mut wclk_data: [RGB8; WCLK_SIZE] = [OFF; WCLK_SIZE];
 
   defmt::info!("set up WS2812 control struct");
   let mut ctrl = Ws2812::new(ctrl_timer, ctrl_pin);
   let mut wclk = Ws2812::new(wclk_timer, wclk_pin);
 
-  ctrl.write(brightness(gamma(ctrl_data.iter().cloned()), 0x10)).unwrap();
   wclk.write(gamma(wclk_data.iter().cloned())).unwrap();
   defmt::info!("entering event loop");
   loop {
+    for i in 0..3 {
+      defmt::info!("loading ctrl LED {}", i);
+      ctrl_data[i] = ON;
+      ctrl.write(brightness(gamma(ctrl_data.iter().cloned()), 0x10))
+          .unwrap();
+      block!(wait_timer.wait()).unwrap();
+    }
+
+    reset_ws2812(&mut ctrl_data);
+    ctrl.write(ctrl_data.iter().cloned()).unwrap();
+
     defmt::info!("waiting for CAN frame...");
     if let Ok(frame) = block!(can.receive()) {
       let id = match frame.id() {
@@ -274,10 +286,14 @@ fn set_word(data: &mut [RGB8], word: Word, rgb: RGB8) {
   }
 }
 
-fn reset_wclk(data: &mut [RGB8]) {
-  for i in 0..WCLK_SIZE {
-    data[i] = OFF;
+fn reset_ws2812(data: &mut [RGB8]) {
+  for led in data.iter_mut() {
+    *led = OFF;
   }
+}
+
+fn reset_wclk(data: &mut [RGB8]) {
+  reset_ws2812(data);
 
   set_word(data, ES, ON);
   set_word(data, IST, ON);
