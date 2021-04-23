@@ -1,0 +1,182 @@
+# Comments specify options; first specified option is the default
+
+# false | true
+unstable_features = true
+
+
+# "Block" | "Visual"
+indent_style = "Visual"
+
+# "Default" | "Off" | "Max"
+use_small_heuristics = "Default"
+
+# "Front" | "Back"
+binop_separator = "Front"
+
+# true | false
+combine_control_expr = true
+
+# 80 | [any positive integer]
+comment_width = 79
+
+# false | true
+condense_wildcard_suffixes = false
+
+# "AlwaysSameLine" | "AlwaysNextLine" | "ClosingNextLine"
+control_brace_style = "AlwaysSameLine"
+
+# false | true
+disable_all_formatting = false
+
+# false | true
+error_on_line_overflow = false
+
+# false | true
+error_on_unformatted = false
+
+# "Tall" | "Compressed" | "Vertical"
+fn_args_layout = "Tall"
+
+# "SameLineWhere" | "AlwaysNextLine" | "PreferSameLine"
+brace_style = "PreferSameLine"
+
+# true | false
+empty_item_single_line = true
+
+# 0 | [any positive integer]
+enum_discrim_align_threshold = 0
+
+# false | true
+fn_single_line = false
+
+# false | true
+where_single_line = true
+
+# true | false
+force_explicit_abi = true
+
+# false | true
+format_strings = true
+
+# false | true
+format_macro_matchers = false
+
+# true | false
+format_macro_bodies = true
+
+# false | true
+hard_tabs = false
+
+# "Block" | "Visual"
+imports_indent = "Visual"
+
+# "Mixed" | "Horizontal" | "HorizontalVertical" | "Vertical"
+imports_layout = "HorizontalVertical"
+
+# false | true
+merge_imports = true
+
+# false | true
+match_block_trailing_comma = false
+
+# 100 | [any positive integer]
+max_width = 79
+
+# true | false
+merge_derives = true
+
+# false | true
+force_multiline_blocks = false
+
+# "Auto" | "Native" | "Unix" | "Windows"
+newline_style = "Unix"
+
+# false | true
+normalize_comments = true
+
+# true | false
+remove_nested_parens = true
+
+# true | false
+reorder_imports = true
+
+# true | false
+reorder_modules = true
+
+# false | true
+reorder_impl_items = true
+
+# "Never" | "Always" | "Unnumbered"
+report_todo = "Never"
+
+# "Never" | "Always" | "Unnumbered"
+report_fixme = "Never"
+
+# false | true
+skip_children = false
+
+# true | false
+space_after_colon = true
+
+# false | true
+space_before_colon = false
+
+# 0 | [any positive integer]
+struct_field_align_threshold = 20
+
+# false | true
+spaces_around_ranges = false
+
+# true | false
+struct_lit_single_line = true
+
+# 4 | [any positive integer]
+tab_spaces = 2
+
+# "Vertical" | "Always" | "Never" | "Vertical"
+trailing_comma = "Vertical"
+
+# true | false
+trailing_semicolon = true
+
+# "Wide" | "Compressed"
+type_punctuation_density = "Wide"
+
+# false | true
+use_field_init_shorthand = false
+
+# false | true
+use_try_shorthand = false
+
+# false | true
+format_code_in_doc_comments = true
+
+# false | true
+wrap_comments = true
+
+# true | false
+match_arm_blocks = true
+
+# false | true
+overflow_delimited_expr = false
+
+# 1 | [any positive integer]
+blank_lines_upper_bound = 2
+
+# 0 | [any positive integer]
+blank_lines_lower_bound = 0
+
+# false | true
+hide_parse_errors = false
+
+# "Auto" | "Always" | "Never"
+color = "Auto"
+
+# "2015" | "2018"
+edition = "2018"
+
+# "One" | "Two"
+version = "Two"
+
+# false | true
+normalize_doc_attributes = false
